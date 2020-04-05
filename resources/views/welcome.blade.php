@@ -96,48 +96,5 @@
                 </div>
             </div>
         </div>
-
-        <script>
-        const insert = `mutation insertPost($title: String!, $active: Boolean!, $user_id: Int!) {
-                            createPost(title: $title, active: $active, user_id: $user_id) {
-                                id
-                            }
-                        }`;
-        const getData = `{
-                            user_paginated(page: 1) {
-                                current_page
-                                data {
-                                    name
-                                    email
-                                    posts {
-                                        title
-                                        active
-                                    }
-                                }
-                                total
-                                per_page
-                            }
-                            posts {
-                                data {
-                                    title
-                                    active
-                                }
-                            }
-                        }`;
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        fetch('http://localhost:8000/graphql', {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify({
-                query: getData,
-                variables: {
-                    "title": "Artigo 8",
-                    "active": true,
-                    "user_id": 8
-                }
-            })
-        });
-        </script>
     </body>
 </html>
