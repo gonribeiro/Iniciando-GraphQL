@@ -26,3 +26,14 @@ Route::get('products', function(){
 Route::get('products/{product}', function(\App\Product $product){
     return new \App\Http\Resources\ProductResource($product);
 });
+
+Route::post('login', function(Request $request){
+    $data = $request->only('email', 'password');
+    $token = \Auth::guard('api')->attempt($data);
+    if (!$token) {
+        return response()->json([
+            'error' => 'Credentials invalid'
+        ], 400);
+    } 
+    return ['token' => $token];
+});
