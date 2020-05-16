@@ -7,12 +7,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ClienteTest extends TestCase
+class ClienteRestTest extends TestCase
 {
     use RefreshDatabase;
     use DatabaseMigrations;
 
-    public function test_exibe_todos_os_clientes()
+    public function test_rota_exibe_todos_os_clientes()
     {
         $this->seed(['ClienteSeeder']);
 
@@ -21,7 +21,7 @@ class ClienteTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_exibe_um_cliente()
+    public function test_rota_exibe_um_cliente()
     {
         $this->seed(['ClienteSeeder']);
 
@@ -30,7 +30,7 @@ class ClienteTest extends TestCase
         $response->assertStatus(200);
     }
     
-    public function test_cria_cliente()
+    public function test_criar_cliente()
     {
         $this->seed(['ClienteSeeder']);
 
@@ -44,7 +44,7 @@ class ClienteTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_atualiza_cliente()
+    public function test_atualizar_cliente()
     {
         $this->seed(['ClienteSeeder']);
 
@@ -58,7 +58,7 @@ class ClienteTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_desabilita_cliente()
+    public function test_desabilitar_cliente()
     {
         $this->seed(['ClienteSeeder']);
 
@@ -67,7 +67,7 @@ class ClienteTest extends TestCase
         $response->assertStatus(204);
     }
 
-    public function test_restaura_cliente_desabilitado()
+    public function test_restaurar_cliente_desabilitado()
     {
         $this->seed(['ClienteSeeder']);
 

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\TipoAmostraEnum;
 
 class CreateAmostrasTable extends Migration
 {
@@ -16,6 +17,7 @@ class CreateAmostrasTable extends Migration
         Schema::create('amostras', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('cliente_id');
+            $table->enum('tipo_amostra', TipoAmostraEnum::getValues());
             $table->timestamps();
             $table->softDeletes();
         });

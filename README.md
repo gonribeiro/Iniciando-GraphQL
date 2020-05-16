@@ -1,6 +1,4 @@
-
-Rest+TDD, Eloquent, Tinker, Factory, Migration, Seed,
-
+# Instalando e Preparando Projeto Rest
 - Criar projeto na última versão do Laravel no repositório local:
 
 ``` 
@@ -16,6 +14,12 @@ $ composer create-project laravel/laravel . --prefer-dist
 'locale' => 'pt_br',
 'fallback_locale' => 'pt_BR',
 'faker_locale' => 'pt_BR',
+```
+
+- Pacote de Enum para Laravel: https://github.com/BenSampo/laravel-enum
+
+```
+$ php artisan make:enum AmostraType
 ```
 
 - Criar modelo com "migração (-m), fábrica (-f) e semeador (-s)":
@@ -42,6 +46,8 @@ $ php artisan make:resource v1/ClienteResource
 $ php artisan make:controller v1\ClienteApiController 
 ```
 
+# Eloquent e Tinker
+
 - Exemplo de consultas no Eloquent: 
 
 ``` 
@@ -57,17 +63,163 @@ $ Amostra::find(1)->cliente;
 $ Cliente::with('amostras')->get()
 ```
 
+# Teste Rest
+
 - Criar e executar testes
 
 ```
 // Criar teste
-$ php artisan make:test ClienteTest
+$ php artisan make:test ClienteRestTest
 
 // Executar teste
 $ artisan test
 ```
 
-- Modelagem do Banco de Dados: https://dbdiagram.io/d
+# GraphQL
+
+- Pacote GraphQL para Laravel: https://lighthouse-php.com/
+- Exemplo de consultas: https://localhost/iniciando_laravel/graphql-playground
+
+```
+# GET
+
+{
+  # Paginado
+  clientesPaginate(first: 3) {
+    data {
+      id
+      nome
+    }
+    paginatorInfo {
+      currentPage
+      lastPage
+    }
+  }
+  # Show
+  cliente(id: 1) {
+    nome
+    # Relacionamento
+    amostras {
+      cliente_id
+      tipo_amostra
+    }
+  }
+  # Index
+  clientes {
+    id
+    nome
+    nascimento
+    documento
+    updated_at
+    amostras {
+      cliente_id
+      tipo_amostra
+      created_at
+    }
+  }
+  # Retorna todos incluindo excluídos (Soft Delete)
+  { 
+    clientes(trashed: WITH) {
+      id
+      nome
+    }
+  }
+}
+```
+
+```
+# POST
+
+mutation {
+  criarCliente(
+    nome: "Fulano", 
+    nascimento: "2020-01-01",
+    documento: "010101"
+  ) {
+    id
+    nome
+    nascimento
+    documento
+  }
+}
+```
+
+```
+# UPDATE
+
+mutation {
+  atualizarCliente(
+    id: "2", 
+    nome: "Beltrano", 
+    nascimento: "2020-02-02",
+    documento: "020202"
+  ) {
+    id
+    nome
+    nascimento
+    documento
+  }
+}
+```
+
+```
+# Upsert - *atualize ou crie (se ele não existir)
+
+mutation {
+  upsertCliente(
+    id: "10", 
+    nome: "Beltrano", 
+    nascimento: "2020-02-02",
+    documento: "020202"
+  ) {
+    id
+    nome
+    nascimento
+    documento
+  }
+}
+```
+
+```
+# SOFT DELETE
+
+mutation {
+  desabilitarCliente(id: "1") {
+    nome # Retorna o objeto excluído para última chance de examiná-lo
+  }
+}
+```
+
+```
+# RESTORE SOFT DELETE
+
+mutation {
+  restaurarCliente(
+    id: 1
+  ) {
+    id
+    nome
+  }
+}
+```
+
+```
+# FORCE DELETE
+
+mutation {
+  apagarCliente(id: 1) {
+    id
+    nome
+  }
+}
+```
+
+# Teste GraphQL
+- Pacote de teste para GraphQL: https://github.com/marvinrabe/laravel-graphql-test
+
+# Banco de dados
+
+- Modelagem: https://dbdiagram.io/d
 
 ```
 table cliente {
@@ -82,6 +234,7 @@ table cliente {
 table amostra {
   id id [pk, not null]
   cliente_id id [not null]
+  tipo_amostra int [not null, enum: urina, sangue]
   created_at timestamp
   update_at timestamp
   delete_at timestamp
@@ -99,8 +252,8 @@ table analise_amostra {
 
 table tipo_analise {
   id id [pk, not null]
-  nome varchar(50)
-  preco decimal
+  nome varchar(50) [not null]
+  preco decimal [not null]
   created_at timestamp
   delete_at timestamp
 }

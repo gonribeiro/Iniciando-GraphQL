@@ -1,0 +1,53 @@
+"A date string with format `Y-m-d`, e.g. `2011-05-23`."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"A datetime and timezone string in ISO 8601 format `Y-m-dTH:i:sO`, e.g. `2020-04-20T13:53:12+02:00`."
+scalar DateTimeTz @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTimeTz")
+
+type Query {
+    clientes: [Cliente!]! @all @softDeletes
+    clientesPaginate: [Cliente!]! @paginate
+    cliente(id: ID @eq): Cliente @find
+
+    amostras: [Amostra!] @all
+    amostra(id: ID @eq): Amostra @find
+}
+
+type Mutation {
+    criarCliente(nome: String!, nascimento: Date!, documento: String!): Cliente @create
+    atualizarCliente(id: ID!, nome: String!, nascimento: Date!, documento: String!): Cliente @update
+    upsertCliente(id: ID!, nome: String!, nascimento: Date!, documento: String!): Cliente @upsert
+    desabilitarCliente(id: ID!): Cliente @delete
+    restaurarCliente(id: ID!): Cliente @restore
+    apagarCliente(id: ID!): Cliente @forceDelete
+}
+
+type Cliente {
+    id: ID!
+    nome: String!
+    nascimento: Date!
+    documento: String!
+    updated_at: DateTime!
+    deleted_at: DateTime!
+    amostras: [Amostra!]! @hasMany
+}
+
+type Amostra {
+    id: ID!
+    cliente_id: Int!
+    tipo_amostra: String!
+    created_at: DateTime!
+    cliente: [Cliente!]! @belongsTo
+}
+
+type ClientePaginate {
+    id: ID!
+    nome: String!
+    nascimento: Date!
+    documento: String!
+    updated_at: DateTime!
+    amostras: [Amostra!]! @hasMany
+}
