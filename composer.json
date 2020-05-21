@@ -16,9 +16,11 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "mll-lab/laravel-graphql-playground": "^2.1",
-        "nuwave/lighthouse": "^4.12"
+        "nuwave/lighthouse": "^4.12",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.3",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "haydenpierce/class-finder": "^0.4.2",

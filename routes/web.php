@@ -20,3 +20,11 @@ Route::get('/', function () {
 Route::get('/myip', function () {
     return dd(Request::ip());
 });
+
+Route::get('/cliente', 'ClienteController@index');
+
+Route::get('/setRedis', 'ClienteController@setRedis');
+
+Route::get('/getRedis', 'ClienteController@getRedis');
+
+Route::get('/setgetCache', 'ClienteController@setgetCache');

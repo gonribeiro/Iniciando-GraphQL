@@ -16,8 +16,8 @@ class ClienteApiController extends Controller
      */
     public function index()
     {
-        // return ClienteResource::collection(Cliente::all());
-        return Cliente::all();
+        return ClienteResource::collection(Cliente::all());
+        // return Cliente::all();
     }
 
     /**

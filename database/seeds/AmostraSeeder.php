@@ -12,5 +12,6 @@ class AmostraSeeder extends Seeder
     public function run()
     {
         $amostra = factory(App\Amostra::class, 10)->create();
+        // $amostra = factory(App\Amostra::class, 5000)->create();
     }
 }

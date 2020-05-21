@@ -1,8 +1,10 @@
-# Instalando e Preparando Projeto Rest
+# Instalando e Preparando Projeto
 - Criar projeto na última versão do Laravel no repositório local:
 
 ``` 
 $ composer create-project laravel/laravel . --prefer-dist 
+
+$ composer require barryvdh/laravel-debugbar --dev
 ```
 
 - Alterações no config/app.php 
@@ -215,7 +217,25 @@ mutation {
 ```
 
 # Teste GraphQL
+
 - Pacote de teste para GraphQL: https://github.com/marvinrabe/laravel-graphql-test
+
+# Redis
+
+```
+$ composer require predis/predis
+
+.env:
+CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+```
+
+```
+$ redis-cli
+$ keys *
+$ mget [key]
+$ flushall
+```
 
 # Banco de dados
 
