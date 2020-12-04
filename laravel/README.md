@@ -1,4 +1,8 @@
-# Instalando e Preparando Projeto
+# Documentação:
+- https://laravel.com/docs/
+- https://lighthouse-php.com/master/getting-started/installation.html
+
+# Comandos e alterações realizadas para a criação desse projeto de testes:
 - Criar projeto na última versão do Laravel no repositório local:
 
 ``` 
@@ -71,7 +75,7 @@ $ Cliente::with('amostras')->get()
 
 ```
 // Criar teste
-$ php artisan make:test ClienteRestTest
+$ php artisan make:test ClienteRestTest // Já criados nesse projeto 
 
 // Executar teste
 $ artisan test
@@ -80,9 +84,13 @@ $ artisan test
 # GraphQL
 
 - Pacote GraphQL para Laravel: https://lighthouse-php.com/
-- Exemplo de consultas: https://localhost/iniciando_laravel/graphql-playground
+- Exemplo de consultas: Use graphql-playground, exemplo:
+  - http://seu_host/graphql-playground
+  - https://localhost/iniciando_laravel/graphql-playground
 
 ```
+# Exemplos funcionais nesse projeto (lembre-se de ter feito a migração e preenchido o banco de dados)
+
 # GET
 
 {
@@ -223,7 +231,7 @@ mutation {
 # Redis
 
 ```
-$ composer require predis/predis
+$ composer require predis/predis // Já instalado neste projeto
 
 .env:
 CACHE_DRIVER=redis
@@ -231,6 +239,8 @@ SESSION_DRIVER=redis
 ```
 
 ```
+Alguns comandos Redis:
+
 $ redis-cli
 $ keys *
 $ mget [key]
@@ -239,7 +249,7 @@ $ flushall
 
 # Banco de dados
 
-- Modelagem: https://dbdiagram.io/d
+- Modelagem: Para visualizar, use https://dbdiagram.io/d copiando e colando o código abaixo.
 
 ```
 table cliente {

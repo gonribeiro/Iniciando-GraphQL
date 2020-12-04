@@ -1,12 +1,38 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env
-.env.backup
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
+# Laravel
+
+/laravel/node_modules
+/laravel/public/hot
+/laravel/public/storage
+/laravel/storage/*.key
+/laravel/vendor
+/laravel/.env
+/laravel/.env.backup
+/laravel/.phpunit.result.cache
+/laravel/Homestead.json
+/laravel/Homestead.yaml
+/laravel/npm-debug.log
+/laravel/yarn-error.log
+
+# React
+
+# dependencies
+/react/node_modules
+/react/.pnp
+/react/.pnp.js
+
+# testing
+/react/coverage
+
+# production
+/react/build
+
+# misc
+/react/.DS_Store
+/react/.env.local
+/react/.env.development.local
+/react/.env.test.local
+/react/.env.production.local
+
+/react/npm-debug.log*
+/react/yarn-debug.log*
+/react/yarn-error.log*
