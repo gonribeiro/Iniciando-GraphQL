@@ -16,11 +16,13 @@ const SHOW_CLIENTE = gql`
 `;
 //#endregion
 
-function Index() {
+function Show() {
     const { loading, error, data } = useQuery(SHOW_CLIENTE);
   
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
+
+    console.log('data: ' + data);
 
     return (
         <Fragment>
@@ -37,4 +39,4 @@ function Index() {
     ) 
 }
 
-export default Index;
+export default Show;
