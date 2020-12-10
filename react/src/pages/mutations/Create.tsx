@@ -1,41 +1,20 @@
-import { gql, useMutation, useQuery, NetworkStatus } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
+import { TODOS_OS_CLIENTES } from './../../graphql/queries/clientes';
+import { CRIAR } from './../../graphql/mutations/clientes';
 
 function Create() {
-    const { loading, error, data, refetch, networkStatus } = useQuery(
-        gql`
-            query getClientes {
-                clientes {
-                    id
-                    nome
-                }
-            }
-        `, {
+    const { loading, error, data, refetch } = useQuery(TODOS_OS_CLIENTES, {
             fetchPolicy: "network-only",
             notifyOnNetworkStatusChange: true,
         }
     );
 
     let input: any;
-    const [Add, { loading: mutationLoading }] = useMutation(
-        gql`
-            mutation Add($nome: String!) {
-                criarCliente(
-                    nome: $nome, 
-                    nascimento: "2020-01-01",
-                    documento: "010101"
-                ) {
-                    id
-                    nome
-                    nascimento
-                    documento
-                }
-            }
-        `
-    );
+    const [Add, { loading: mutationLoading }] = useMutation(CRIAR);
 
     if (mutationLoading) return <p>Atualizando...</p>;
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>Erro :(</p>;
 
     return (
         <div>
